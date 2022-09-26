@@ -11,7 +11,7 @@ class UserChoice(Enum):
 	MANAGE = 3
 	QUIT = 4
 
-favs = {}
+favs = {"cat": "meows"}
 
 def printMenu():
 	print("Would you like to: ")
@@ -20,15 +20,36 @@ def printMenu():
 	print("3: Manage Favourites")
 	print("4: Quit")	
 
-def menu():
-	printMenu()
+def printManageMenu():
+	print("Which management function would you like")
+	print("1: List Videos")
+	print("2: Add Video")
+	print("3: Remove Video")
+
+def processManageChoice(choice):
+	if choice == str(1):
+		return listVideos(favs)
+	return 
+
+def manageVideos():
+	return menu(1)
+
+def menu(menuLevel):
+	if(menuLevel) == 0:
+		printMenu()
+	else:
+		printManageMenu()
 	return parseInput(input("Choice: "))
 
 #assuming properly formatted	
 def parseInput(option):
 	return option
 		
-def listVideos():
+def listVideos(videos):
+	print("##Video Favourites##")
+	for video in videos:
+		print(video + ": " + videos[video])
+	print("##End Favourites##")
 	return
 def playOnlineVideo(app, url):
 	userCommand = app + " " + url
@@ -43,8 +64,16 @@ def addVideo(url):
 
 playerChoice = "mpv"
 while True:
-	selection = menu()
+	selection = menu(0)
 	if selection == str(UserChoice.URL.value):
 		playOnlineVideo(playerChoice, input("URL: "))
+	elif selection == str(UserChoice.FAV.value):
+		break
+	#need to add a secondary menu to the one below (manage) 
+	# currently will bypass it and just list for testing
+	elif selection == str(UserChoice.MANAGE.value):
+		#listVideos(favs)
+		processManageChoice(manageVideos())
 	elif selection == str(UserChoice.QUIT.value):
 		break	
+	
