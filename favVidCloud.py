@@ -69,7 +69,7 @@ def removeVideo(name):
 playerChoice = "mpv"
 with open("bookmarks.json", "r") as read_file:
 	userData = json.load(read_file)
-favs = userData["favs"]
+favs = userData
 while True:
 	selection = menu(0)
 	if selection == str(UserChoice.URL.value):
@@ -81,3 +81,6 @@ while True:
 		processManageChoice(manageVideos())
 	elif selection == str(UserChoice.QUIT.value):
 		break	
+print(favs)
+with open("bookmarks.json", "w") as outfile:
+	json.dump(favs, outfile)
