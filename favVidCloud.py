@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 import os
 from enum import Enum
+import json
 
 #use file io to permantly store items later
 #	for now just use a dictionary
@@ -11,7 +12,6 @@ class UserChoice(Enum):
 	MANAGE = 3
 	QUIT = 4
 
-favs = {"cat": "meows", "Lipo Song": "https://www.youtube.com/watch?v=jYdaQJzcAcw"}
 
 def printMenu():
 	print("Would you like to: ")
@@ -65,7 +65,11 @@ def addVideo(name, url):
 
 def removeVideo(name):
 	del favs[name]
+
 playerChoice = "mpv"
+with open("bookmarks.json", "r") as read_file:
+	userData = json.load(read_file)
+favs = userData["favs"]
 while True:
 	selection = menu(0)
 	if selection == str(UserChoice.URL.value):
@@ -77,4 +81,3 @@ while True:
 		processManageChoice(manageVideos())
 	elif selection == str(UserChoice.QUIT.value):
 		break	
-	
