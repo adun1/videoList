@@ -52,7 +52,7 @@ def parseInput(option):
 def listVideos(videos):
 	print("##Video Favourites##")
 	for video in videos:
-		print(video + ": " + videos[video])
+		print(video)
 	print("##End Favourites##")
 	return
 def playOnlineVideo(app, url):
@@ -81,6 +81,5 @@ while True:
 		processManageChoice(manageVideos())
 	elif selection == str(UserChoice.QUIT.value):
 		break	
-print(favs)
 with open("bookmarks.json", "w") as outfile:
 	json.dump(favs, outfile)
